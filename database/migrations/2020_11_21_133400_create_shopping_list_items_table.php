@@ -15,6 +15,10 @@ class CreateShoppingListItemsTable extends Migration
     {
         Schema::create('shopping_list_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('list_id')->constrained('shopping_lists');
+            $table->foreignId('product_id')->constrained('products');
+            $table->boolean('is_purchased');
+            $table->integer('weight_on_list');
             $table->timestamps();
         });
     }
