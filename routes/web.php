@@ -18,4 +18,5 @@ $router->get('/', function () use ($router) {
 });
 $router->get('user/{id}/lists', 'ShoppingListController@get');
 $router->post('user/{user_id}/lists/{list_id}', 'ShoppingListController@addToList');
-$router->delete('user/{user_id}/lists/{list_id}', 'ShoppingListController@removeFromList');
+$router->delete('user/{user_id}/lists/{list_id}/delete-item/{item_id}', 'ShoppingListController@removeFromList');
+$router->put('user/{user_id}/lists/{list_id}/update-item/{item_id}', 'ShoppingListItemController@updatePurchased');

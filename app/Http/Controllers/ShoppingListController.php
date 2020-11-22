@@ -68,6 +68,7 @@ class ShoppingListController extends Controller
     {
 
         $items_to_add = $request->all();
+        $items_to_add = $items_to_add['items'];
         if (count($items_to_add) == 0)
         {
             $response['error'] = "No items given to add";
@@ -78,6 +79,8 @@ class ShoppingListController extends Controller
                                         ->first();
         $existing_shopping_list_items = ShoppingListItem::where('list_id', $shopping_list->id)
                                                 ->get();
+
+        $new_item = null;
 
         // I guarantee there will always be a product for an input                                     
         foreach ($items_to_add as $new_item) 
@@ -105,13 +108,14 @@ class ShoppingListController extends Controller
             if (!$is_in_list)
             {
     
-                ShoppingListItem::create(['list_id' => $shopping_list->id, 
+                $new_item = ShoppingListItem::create(['list_id' => $shopping_list->id, 
                                         'product_id' => $new_product->id, 
                                         'is_purchased' => false, 
                                         'weight_on_list' => 0]);
+                
             }
         }
-
+        $response['added_item'] = $new_item;
         $response['message'] = "New items added to list";
         return response()->json($response, 200);
     }
@@ -122,12 +126,14 @@ class ShoppingListController extends Controller
      * @param  Request  $request
      * @param  string  $user_id
      * @param  string  $list_id 
+     * @param int $item_id
      * @return Response
      */ 
-    public function removeFromList(Request $request, $user_id, $list_id) 
+    public function removeFromList(Request $request, $user_id, $list_id, $item_id) 
     {
-        $items_to_remove = $request->all();
-        if (count($items_to_remove) == 0)
+        // $items_to_remove = $request->all();
+        $items_to_remove = $item_id;
+        if (!$items_to_remove)
         {
             $response['error'] = "No items given to remove";
             return response()->json($response, 200);
@@ -135,9 +141,9 @@ class ShoppingListController extends Controller
 
         ShoppingListItem::destroy($items_to_remove);        
 
-        $status = 200;
+        $response['removed_item'] = $items_to_remove;
         $response['message'] = "Items successfully deleted";
-        return response()->json($response, $status);
+        return response()->json($response, 200);
         
     }
 }
