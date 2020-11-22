@@ -24,4 +24,5 @@ class ShoppingListItem extends Model
     protected $hidden = [
         '',
     ];
+
 }

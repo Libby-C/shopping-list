@@ -16,3 +16,6 @@
 $router->get('/', function () use ($router) {
     return "Hello";
 });
+$router->get('user/{id}/lists', 'ShoppingListController@get');
+$router->post('user/{user_id}/lists/{list_id}', 'ShoppingListController@addToList');
+$router->delete('user/{user_id}/lists/{list_id}', 'ShoppingListController@removeFromList');
