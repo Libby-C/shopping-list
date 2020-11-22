@@ -1,24 +1,21 @@
-# Lumen PHP Framework
+# To set up for testing locally
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+Initial data needs to be seeded into the database for user, shopping_list, shopping_list_items and products.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+##user:
+INSERT INTO `homestead`.`users` (`id`, `name`, `email`, `password`) VALUES ('1', 'test', 'test@email.com', 'password');
 
-## Official Documentation
+##products:
+INSERT INTO `homestead`.`products` (`id`, `price`, `name`) VALUES ('1', '0.60', 'item');
+INSERT INTO `homestead`.`products` (`id`, `price`, `name`) VALUES ('2', '1.20', 'item2');
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
 
-## Contributing
+##shopping_list
+INSERT INTO `homestead`.`shopping_lists` (`id`, `user_id`, `budget`) VALUES ('1', '1', '50.00');
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Security Vulnerabilities
+##shopping_list_items
+INSERT INTO `homestead`.`shopping_list_items` (`list_id`, `product_id`, `is_purchased`, `weight_on_list`) VALUES ('1', '1', '0', '0');
+INSERT INTO `homestead`.`shopping_list_items` (`list_id`, `product_id`, `is_purchased`, `weight_on_list`) VALUES ('1', '2', '0', '0');
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
 
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
